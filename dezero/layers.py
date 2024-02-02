@@ -231,7 +231,7 @@ class RNN(Layer):
         """
         super().__init__()
         self.x2h = Linear(hidden_size, in_size=in_size)
-        self.h2h = Linear(hidden_size, in_size=in_size, nobias=True)
+        self.h2h = Linear(hidden_size, in_size=hidden_size, nobias=True)
         self.h = None
 
     def reset_state(self):
@@ -327,5 +327,5 @@ class BatchNorm(Layer):
     def __call__(self, x):
         if self.avg_mean.data is None:
             self._init_params(x)
-        return F.batch_nrom(x, self.gamma, self.beta, self.avg_mean.data,
+        return F.batch_norm(x, self.gamma, self.beta, self.avg_mean.data,
                             self.avg_var.data)
